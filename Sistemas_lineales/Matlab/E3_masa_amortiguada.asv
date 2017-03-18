@@ -1,0 +1,9 @@
+clear all;close all;clc
+
+m=1;
+k=10;
+c=2;
+num = [c k];
+den = [m c k];
+
+Gs = tf(n)

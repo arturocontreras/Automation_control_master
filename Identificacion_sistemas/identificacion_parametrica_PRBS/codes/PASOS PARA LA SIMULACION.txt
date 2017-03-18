@@ -1,0 +1,5 @@
+1.EJECUTAR EL SCRIPT labo_desarrollo.m
+2. EJECUTAR EL SCRIPT pruebas_modelos.m
+3. EJECUTAR EL SCRIPT comprobacion_modelos_obtenidos.m
+4. Revisar archivos filtros,pruebas,modelo_Escalado.
+

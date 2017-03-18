@@ -1,0 +1,171 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>T3</title><meta name="generator" content="MATLAB 7.10"><meta name="date" content="2015-09-25"><meta name="m-file" content="T3"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Comparaci&oacute;n aproximaci&oacute;n serie fourier, a un sistema lineal</a></li><li><a href="#3">Planta</a></li><li><a href="#4">Se&ntilde;ales de entrada exacta y aproximada por Fourier</a></li><li><a href="#5">Se&ntilde;ales de salida exacta y aproximada por Fourier</a></li></ul></div><pre class="codeinput">clear <span class="string">all</span>;close <span class="string">all</span>;clc
+</pre><h2>Comparaci&oacute;n aproximaci&oacute;n serie fourier, a un sistema lineal<a name="2"></a></h2><h2>Planta<a name="3"></a></h2><pre class="codeinput">num = [45];
+den = [1 6 45];
+Gs = tf(num,den);
+</pre><h2>Se&ntilde;ales de entrada exacta y aproximada por Fourier<a name="4"></a></h2><pre class="codeinput"><span class="comment">%Se&ntilde;al entrada exacta</span>
+Amp = 0.5;
+f = 1; <span class="comment">%Hz</span>
+offset = 0.5;
+t1 = 0:0.01:10;
+u1 = Amp*square(2*pi*f*t1)+offset;
+figure(1)
+subplot(211)
+plot(t1,u1)
+axis([0 10 -0.2 1.2])
+title(<span class="string">'Se&ntilde;al original square'</span>)
+
+<span class="comment">%Se&ntilde;al entrada aproximada por fourier</span>
+T = 1;
+<span class="comment">%ft = 1*(t&gt;=0 &amp; t&lt;0.5)+0*(t&gt;=0.5 &amp; t&lt;1)</span>
+syms <span class="string">t</span> <span class="string">x</span>;
+a0=(1/T)*int(1,t,0,0.5);
+u = a0; <span class="comment">%T&eacute;rmino 0</span>
+
+<span class="keyword">for</span> n=1:10
+    an=(2/T)*int(cos(2*pi*n*t/T),t,0,0.5);
+    bn=(2/T)*int(sin(2*pi*n*t/T),t,0,0.5);
+
+    u = u + an*cos((2*pi/T)*n*x) + bn*sin((2*pi/T)*n*x); <span class="comment">%sumando los t&eacute;rminos de la serie</span>
+<span class="keyword">end</span>
+
+ x=0:0.01:10;
+ u_x = subs(u,x);
+ subplot(212)
+ plot(x,u_x)
+ title(sprintf(<span class="string">'Se&ntilde;al aproximada por Serie de Fourier %d t&eacute;rminos'</span>,n));
+</pre><img vspace="5" hspace="5" src="T3_01.png" alt=""> <h2>Se&ntilde;ales de salida exacta y aproximada por Fourier<a name="5"></a></h2><pre class="codeinput"><span class="comment">%Se&ntilde;al de salida exacta y1</span>
+y1 = lsim(Gs,u1,t1);
+figure(2)
+subplot(211)
+lsim(Gs,u1,t1)
+title(<span class="string">'Se&ntilde;al de salida exacta y1'</span>)
+
+<span class="comment">%Se&ntilde;al de salida aproximada y2</span>
+y2 = lsim(Gs,u_x,x);
+subplot(212)
+lsim(Gs,u_x,x)
+title(<span class="string">'Se&ntilde;al de salida aproximada y2'</span>)
+</pre><img vspace="5" hspace="5" src="T3_02.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.10<br></p></div><!--
+##### SOURCE BEGIN #####
+clear all;close all;clc
+%% Comparación aproximación serie fourier, a un sistema lineal
+%% Planta
+num = [45];
+den = [1 6 45];
+Gs = tf(num,den);
+
+%% Señales de entrada exacta y aproximada por Fourier
+%Señal entrada exacta
+Amp = 0.5;
+f = 1; %Hz
+offset = 0.5;
+t1 = 0:0.01:10;
+u1 = Amp*square(2*pi*f*t1)+offset;
+figure(1)
+subplot(211)
+plot(t1,u1)
+axis([0 10 -0.2 1.2])
+title('Señal original square')
+
+%Señal entrada aproximada por fourier
+T = 1;
+%ft = 1*(t>=0 & t<0.5)+0*(t>=0.5 & t<1)
+syms t x;
+a0=(1/T)*int(1,t,0,0.5);
+u = a0; %Término 0
+
+for n=1:10
+    an=(2/T)*int(cos(2*pi*n*t/T),t,0,0.5);
+    bn=(2/T)*int(sin(2*pi*n*t/T),t,0,0.5);
+    
+    u = u + an*cos((2*pi/T)*n*x) + bn*sin((2*pi/T)*n*x); %sumando los términos de la serie
+end
+
+ x=0:0.01:10; 
+ u_x = subs(u,x);
+ subplot(212)
+ plot(x,u_x)
+ title(sprintf('Señal aproximada por Serie de Fourier %d términos',n));
+ 
+%% Señales de salida exacta y aproximada por Fourier
+
+%Señal de salida exacta y1
+y1 = lsim(Gs,u1,t1);
+figure(2)
+subplot(211)
+lsim(Gs,u1,t1)
+title('Señal de salida exacta y1')
+
+%Señal de salida aproximada y2
+y2 = lsim(Gs,u_x,x);
+subplot(212)
+lsim(Gs,u_x,x)
+title('Señal de salida aproximada y2')
+
+##### SOURCE END #####
+--></body></html>

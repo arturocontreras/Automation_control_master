@@ -1,0 +1,29 @@
+clear all;close all;clc
+%% Generación de función de entrada con amplitud, frecuencia y ancho variable
+%Ingreso de parámetros:
+% Vmax = 2;
+% Vmin = -2;
+% Ton=0.5;
+% T=2;
+% N=5;
+% u=0;
+% t = 0:0.001:10;
+
+Vmax = input('Ingresa Vmax = ');
+Vmin = input('Ingresa Vmin = ');
+Pon =input('Ingresa %ON = ');
+f = input('Ingresa frecuencia =');
+N =input('Ingresa numero de periodos =');
+
+
+t = 0:0.001:tmax;
+T =1/f;
+Ton =Pon*T/100;
+u =0;
+
+for n=1:N
+u = u + Vmax*(t>=(n-1)*T & t<Ton+(n-1)*T)+Vmin*(t>=Ton+(n-1)*T & t<n*T);
+end
+plot(t,u)
+axis([0 10 -4 4])
+tmax = N*
