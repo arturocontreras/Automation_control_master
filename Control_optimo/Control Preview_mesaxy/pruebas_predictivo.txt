@@ -1,0 +1,40 @@
+---------------------------------------------------------------------
+q4 = 1e8
+velx = 0.05;
+vely = 0.05;
+
+tp=0.1
+Maximo voltaje x: 8.2446
+Valor de Jx = 24.4304*10^3
+Maximo voltaje y: 15.7063
+Valor de Jy = 39.2715*10^3
+
+tp=0.5
+Maximo voltaje x: 12.733
+Valor de Jx = 0.49342*10^3
+Maximo voltaje y: 15.5795
+Valor de Jy = 0.75274*10^3
+
+tp=1
+Maximo voltaje x: 9.1677
+Valor de Jx = 0.21139*10^3
+Maximo voltaje y: 15.9198
+Valor de Jy = 0.29684*10^3
+
+tp=2
+Maximo voltaje x: 9.4718
+Valor de Jx = 0.21125*10^3
+Maximo voltaje y: 15.9212
+Valor de Jy = 0.29662*10^3
+
+tp =3
+Maximo voltaje x: 9.4729
+Valor de Jx = 0.21126*10^3
+Maximo voltaje y: 15.9212
+Valor de Jy = 0.29662*10^3
+
+-----------------------------------------
+
+q4 = 1e8
+velx = 0.01;
+vely = 0.01;

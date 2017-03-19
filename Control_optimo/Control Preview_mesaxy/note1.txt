@@ -1,0 +1,12 @@
+Introducir tiempo preview : 0.1
+Maximo voltaje x: 16.61
+Valor de Jx = 11.3445*10^3
+Maximo voltaje y: 32.5777
+Valor de Jy = 19.1297*10^3
+
+---------------------------------
+Introducir tiempo preview : 2
+Maximo voltaje x: 21.8552
+Valor de Jx = 0.42177*10^3
+Maximo voltaje y: 33.4559
+Valor de Jy = 0.63086*10^3

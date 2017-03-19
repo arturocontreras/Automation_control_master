@@ -1,0 +1,17 @@
+arduino-1.6.9-windows
+
+--------Arduino:
+//Pareja:(principal)
+En el controlador : modelo_controlador2.ino
+En la planta :      modelo_destilador2.ino
+
+//Sino otra opcion:(si no funciona el principañ)
+En el controlador : modelo_controlador_serial_labview3_ruido_dac.ino
+En la planta :      modelo_test1.ino
+
+
+------Labview
+DESTILADOR.vi
+
+------Simulaciones Matlab
+simulacion_planta.m

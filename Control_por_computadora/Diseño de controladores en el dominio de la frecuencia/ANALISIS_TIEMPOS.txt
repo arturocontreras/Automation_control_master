@@ -1,0 +1,8 @@
+5 botellas: 
+t1 : 4seg posicionarse
+t2: 2seg llenado
+tt = 6s
+
+2500 botellas:
+
+500*6 = 3000s < 3600s=1hr
